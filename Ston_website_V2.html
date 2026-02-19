@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BlueBridge Global Prep — Get the score. Get the offer. Go global.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ── TOKENS ── */
+:root{
+  --primary:#1E5EFF;--navy:#0B1B3A;--teal:#11B5A4;--warm:#FFB020;
+  --bg:#F6F8FF;--surface:#fff;--border:#E2E9FF;--text:#0A1020;--muted:#5A6A8A;
+  --r-sm:12px;--r:20px;--r-lg:28px;--r-xl:36px;
+  --sh-sm:0 1px 3px rgba(14,30,80,.06);--sh:0 4px 16px rgba(14,30,80,.08);--sh-lg:0 16px 40px rgba(14,30,80,.12);
+  --ff-h:'Manrope',sans-serif;--ff-b:'Plus Jakarta Sans',sans-serif;
+  --header-h:72px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}/* we handle smooth scroll in JS */
+body{font-family:var(--ff-b);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--ff-b);cursor:pointer;border:none;background:none}
+ul{list-style:none}
+input,textarea,select{font-family:var(--ff-b)}
+
+/* ── LAYOUT ── */
+.container{max-width:1160px;margin:0 auto;padding:0 24px}
+.section{padding:80px 0}
+
+/* ── SCROLL-PROGRESS ── */
+#prog{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--primary),var(--teal));z-index:9999;border-radius:0 2px 2px 0;transition:width .08s linear}
+
+/* ── ANIMATED MESH ── */
+.mesh{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.mesh span{position:absolute;border-radius:50%;filter:blur(80px);animation:drift 10s ease-in-out infinite}
+.mesh .m1{width:580px;height:580px;top:-180px;left:-160px;background:radial-gradient(circle,rgba(30,94,255,.18) 0%,transparent 65%)}
+.mesh .m2{width:520px;height:520px;top:60px;right:-180px;background:radial-gradient(circle,rgba(17,181,164,.16) 0%,transparent 65%);animation-delay:-3.5s}
+.mesh .m3{width:440px;height:440px;bottom:-160px;left:38%;background:radial-gradient(circle,rgba(255,176,32,.14) 0%,transparent 65%);animation-delay:-6s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(18px,-22px) scale(1.03)}66%{transform:translate(-14px,16px) scale(.97)}}
+
+/* ── HEADER ── */
+#site-header{
+  position:sticky;top:3px;z-index:200;height:var(--header-h);
+  background:rgba(246,248,255,.85);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);transition:box-shadow .3s;
+}
+#site-header.scrolled{box-shadow:var(--sh)}
+.hdr-inner{display:flex;align-items:center;justify-content:space-between;height:100%;padding:0 24px;max-width:1160px;margin:0 auto;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--ff-h);font-weight:700;font-size:1rem;color:var(--navy);cursor:pointer;background:none;border:none}
+.logo-icon{width:38px;height:38px;border-radius:var(--r-sm);background:linear-gradient(135deg,var(--primary),#4d8aff);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 12px rgba(30,94,255,.35)}
+.logo-icon svg{width:20px;height:20px}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links button{padding:7px 13px;border-radius:var(--r-sm);font-size:.85rem;font-weight:500;color:var(--muted);transition:color .2s,background .2s;background:none;border:none}
+.nav-links button:hover{color:var(--navy);background:rgba(30,94,255,.07)}
+.nav-links button.active{color:var(--primary);background:rgba(30,94,255,.1);font-weight:700}
+.hdr-actions{display:flex;align-items:center;gap:10px}
+/* cart pill */
+.cart-pill{display:flex;align-items:center;gap:7px;padding:7px 14px;border-radius:var(--r-sm);border:1px solid var(--border);background:var(--surface);font-size:.8rem;color:var(--muted);font-weight:500;cursor:pointer;transition:border-color .2s,background .2s;position:relative}
+.cart-pill:hover{background:#f0f4ff;border-color:var(--primary)}
+.cart-badge{background:var(--navy);color:#fff;font-size:.7rem;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s}
+.cart-badge.bump{transform:scale(1.4);background:var(--teal)}
+/* btn styles */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:var(--r);font-size:.9rem;font-weight:600;transition:transform .18s,box-shadow .18s;cursor:pointer;border:none;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:none}
+.btn-primary{background:linear-gradient(135deg,var(--primary),#3a7aff);color:#fff;box-shadow:0 4px 14px rgba(30,94,255,.35)}
+.btn-primary:hover{box-shadow:0 6px 20px rgba(30,94,255,.45)}
+.btn-outline{background:var(--surface);color:var(--navy);border:1.5px solid var(--border);box-shadow:var(--sh-sm)}
+.btn-outline:hover{border-color:var(--primary);background:#f0f4ff}
+.btn-teal{background:linear-gradient(135deg,var(--teal),#00d4c3);color:#fff;box-shadow:0 4px 14px rgba(17,181,164,.3)}
+.btn-warm{background:linear-gradient(135deg,var(--warm),#ffd060);color:var(--navy);font-weight:700;box-shadow:0 4px 14px rgba(255,176,32,.3)}
+.btn-ghost{background:rgba(255,255,255,.1);color:#fff;border:1.5px solid rgba(255,255,255,.2)}
+.btn-sm{padding:8px 16px;font-size:.82rem;border-radius:var(--r-sm)}
+.btn-lg{padding:14px 28px;font-size:1rem}
+.btn svg{flex-shrink:0}
+/* hamburger */
+.hamburger{display:none;width:40px;height:40px;border-radius:var(--r-sm);background:var(--surface);border:1.5px solid var(--border);align-items:center;justify-content:center;color:var(--navy);flex-direction:column;gap:4px;padding:0}
+.hamburger span{display:block;width:18px;height:1.5px;background:var(--navy);transition:transform .25s,opacity .25s}
+.hamburger.open .bar1{transform:translateY(5.5px) rotate(45deg)}
+.hamburger.open .bar2{opacity:0}
+.hamburger.open .bar3{transform:translateY(-5.5px) rotate(-45deg)}
+
+/* ── MOBILE OVERLAY + SLIDEOVER ── */
+.overlay{position:fixed;inset:0;z-index:300;background:rgba(11,27,58,.4);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.open{opacity:1;pointer-events:auto}
+.slideover{position:fixed;top:0;right:0;height:100%;width:min(88%,360px);background:var(--surface);z-index:301;transform:translateX(100%);transition:transform .35s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;padding:24px;box-shadow:-20px 0 60px rgba(11,27,58,.15)}
+.slideover.open{transform:translateX(0)}
+.slideover-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.slideover-links{display:flex;flex-direction:column;gap:6px;flex:1}
+.slideover-links button{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-radius:var(--r);border:1.5px solid var(--border);font-size:.9rem;font-weight:500;color:var(--text);transition:background .2s,border-color .2s,color .2s;background:none;text-align:left}
+.slideover-links button:hover,.slideover-links button.active{background:#f0f4ff;border-color:var(--primary);color:var(--primary)}
+.close-btn{width:36px;height:36px;border-radius:var(--r-sm);border:1.5px solid var(--border);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--navy);transition:background .2s}
+.close-btn:hover{background:#f0f4ff}
+
+/* ── PILLS / BADGES / EYEBROW ── */
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);background:rgba(255,255,255,.8);backdrop-filter:blur(8px);color:var(--navy)}
+.pill-primary{border-color:rgba(30,94,255,.25);background:rgba(30,94,255,.06);color:var(--primary)}
+.pill-teal{border-color:rgba(17,181,164,.25);background:rgba(17,181,164,.06);color:var(--teal)}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:var(--navy);color:#fff}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;font-size:.75rem;font-weight:600}
+.badge-warm{background:rgba(255,176,32,.15);color:#B07800}
+.badge-primary{background:rgba(30,94,255,.1);color:var(--primary)}
+
+/* ── SECTION HEAD ── */
+.section-head{margin-bottom:44px}
+.section-head h2{font-family:var(--ff-h);font-weight:800;font-size:clamp(1.75rem,4vw,2.6rem);color:var(--navy);line-height:1.2;margin-top:10px}
+.section-head p{color:var(--muted);max-width:600px;margin-top:12px;font-size:1rem;line-height:1.7}
+.section-head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* ── CARDS ── */
+.card{background:rgba(255,255,255,.75);border:1.5px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--sh-sm);backdrop-filter:blur(8px);transition:transform .22s,box-shadow .22s;overflow:hidden}
+.card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.card-pad{padding:28px}
+.card-top::before{content:'';display:block;height:3px;background:linear-gradient(90deg,var(--primary),var(--teal));margin:-28px -28px 24px}
+.card-top-warm::before{background:linear-gradient(90deg,var(--warm),#ff9800)}
+.icon-box{width:46px;height:46px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;border:1.5px solid var(--border);background:var(--surface);margin-bottom:16px;flex-shrink:0}
+.icon-box-p{background:rgba(30,94,255,.08);border-color:rgba(30,94,255,.2)}
+.icon-box-t{background:rgba(17,181,164,.08);border-color:rgba(17,181,164,.2)}
+.icon-box-w{background:rgba(255,176,32,.1);border-color:rgba(255,176,32,.25)}
+.icon-box-n{background:rgba(11,27,58,.06);border-color:rgba(11,27,58,.15)}
+
+/* ── GRIDS ── */
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+/* ── HERO ── */
+#home{position:relative;padding:80px 0 64px;overflow:hidden}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:56px;position:relative;z-index:1}
+h1.hero-title{font-family:var(--ff-h);font-weight:800;font-size:clamp(2rem,5vw,3.2rem);color:var(--navy);line-height:1.15;letter-spacing:-.02em;margin-bottom:20px}
+h1.hero-title .hl{background:linear-gradient(90deg,var(--primary),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{color:var(--muted);font-size:1.05rem;line-height:1.75;margin-bottom:32px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.stat-card{background:rgba(255,255,255,.8);border:1.5px solid var(--border);border-radius:var(--r);padding:16px;text-align:center;backdrop-filter:blur(8px)}
+.stat-val{font-family:var(--ff-h);font-weight:800;font-size:1.5rem;color:var(--primary)}
+.stat-lbl{font-size:.78rem;color:var(--muted);margin-top:2px}
+.hero-card{background:rgba(255,255,255,.82);border:1.5px solid var(--border);border-radius:var(--r-xl);padding:28px;backdrop-filter:blur(12px);box-shadow:var(--sh-lg);position:relative;overflow:hidden;animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 10%,rgba(30,94,255,.1) 0%,transparent 50%),radial-gradient(circle at 85% 80%,rgba(17,181,164,.1) 0%,transparent 45%);pointer-events:none}
+.hc-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.hc-mini{background:rgba(255,255,255,.9);border:1.5px solid var(--border);border-radius:var(--r);padding:16px}
+.hc-mini .label{font-size:.75rem;color:var(--muted);margin-bottom:4px}
+.hc-mini .value{font-family:var(--ff-h);font-weight:700;font-size:.95rem;color:var(--navy)}
+.hc-banner{background:linear-gradient(135deg,var(--navy),#1a3a70);border-radius:var(--r);padding:18px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 8px 24px rgba(11,27,58,.25)}
+.hc-banner .b-text{color:#fff;font-size:.875rem;font-weight:600}
+.hc-banner .b-sub{color:rgba(255,255,255,.65);font-size:.75rem;margin-top:2px}
+.hc-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.hc-trio-item{background:rgba(255,255,255,.9);border:1.5px solid var(--border);border-radius:var(--r);padding:12px 10px;text-align:center}
+.hc-trio-item .t-label{font-size:.7rem;color:var(--muted)}
+.hc-trio-item .t-val{font-family:var(--ff-h);font-weight:700;font-size:.9rem;color:var(--navy);margin-top:4px}
+
+/* ── TRUST BAR ── */
+.trust-bar{display:flex;align-items:center;justify-content:center;gap:28px;padding:18px 24px;border-radius:var(--r);background:rgba(255,255,255,.7);border:1.5px solid var(--border);backdrop-filter:blur(8px);flex-wrap:wrap;margin-top:44px}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:.85rem;font-weight:500;color:var(--navy)}
+.trust-item svg{color:var(--teal)}
+.trust-div{width:1px;height:20px;background:var(--border)}
+
+/* ── CHECK LIST ── */
+.check-list{display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.check-list li{display:flex;align-items:flex-start;gap:8px;font-size:.85rem;color:var(--muted)}
+.check-list li svg{flex-shrink:0;color:var(--teal);margin-top:1px}
+
+/* ── TABS ── */
+.tab-bar{display:inline-flex;background:rgba(255,255,255,.8);border:1.5px solid var(--border);border-radius:var(--r);padding:5px;gap:4px;backdrop-filter:blur(8px);margin-bottom:28px}
+.tab-btn{padding:9px 22px;border-radius:var(--r-sm);font-size:.875rem;font-weight:600;color:var(--muted);transition:all .2s}
+.tab-btn.active{background:var(--navy);color:#fff;box-shadow:0 3px 10px rgba(11,27,58,.25)}
+.tab-btn:hover:not(.active){background:rgba(30,94,255,.07);color:var(--primary)}
+
+/* ── PRICE TOGGLE ── */
+.price-toggle{display:inline-flex;background:rgba(255,255,255,.8);border:1.5px solid var(--border);border-radius:var(--r);padding:5px;gap:4px}
+.price-toggle .t-opt{padding:8px 20px;border-radius:var(--r-sm);font-size:.875rem;font-weight:600;color:var(--muted);transition:all .2s}
+.price-toggle .t-opt.active{background:var(--navy);color:#fff}
+.price-big{font-family:var(--ff-h);font-weight:800;font-size:2.2rem;color:var(--navy);transition:opacity .15s}
+.price-card.featured{background:linear-gradient(160deg,rgba(30,94,255,.05),rgba(17,181,164,.05));border-color:rgba(30,94,255,.3)}
+
+/* ── SHOP FILTER ── */
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;align-items:center}
+.filter-chip{padding:6px 16px;border-radius:100px;font-size:.8rem;font-weight:600;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .2s}
+.filter-chip.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.filter-chip:hover:not(.active){border-color:var(--primary);color:var(--primary)}
+.search-wrap{position:relative;flex:1;min-width:200px}
+.search-wrap input{width:100%;padding:9px 16px 9px 38px;border-radius:var(--r);border:1.5px solid var(--border);background:var(--surface);font-size:.875rem;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s}
+.search-wrap input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(30,94,255,.1)}
+.search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.popular-tag{display:inline-flex;align-items:center;background:var(--navy);color:#fff;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:100px;margin-bottom:10px}
+.pc-title{font-family:var(--ff-h);font-weight:700;color:var(--navy);font-size:.975rem;margin-bottom:8px}
+.pc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:16px;gap:8px;flex-wrap:wrap}
+.pc-price{font-family:var(--ff-h);font-weight:800;font-size:1.15rem;color:var(--primary)}
+
+/* ── FAQ ── */
+.faq-item{border:1.5px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden;background:rgba(255,255,255,.7);transition:border-color .2s}
+.faq-item.open{border-color:rgba(30,94,255,.3)}
+.faq-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:18px 22px;text-align:left;font-size:.935rem;font-weight:600;color:var(--navy);cursor:pointer;gap:12px}
+.faq-icon{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--primary);transition:transform .25s;background:var(--surface)}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--primary);color:#fff;border-color:var(--primary)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-body.open{max-height:300px}
+.faq-body p{padding:0 22px 18px;color:var(--muted);font-size:.9rem;line-height:1.7}
+
+/* ── CONTACT ── */
+.contact-item{display:flex;align-items:center;gap:14px;padding:16px;border-radius:var(--r);border:1.5px solid var(--border);background:rgba(255,255,255,.7);transition:border-color .2s,transform .2s;text-decoration:none;color:inherit}
+.contact-item:hover{border-color:var(--primary);transform:translateX(4px)}
+.contact-icon{width:42px;height:42px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:7px}
+.form-group label .req{color:#e53e3e}
+.form-input,.form-textarea{width:100%;padding:10px 16px;border-radius:var(--r);border:1.5px solid var(--border);background:var(--surface);font-size:.9rem;color:var(--text);outline:none;font-family:var(--ff-b);transition:border-color .2s,box-shadow .2s}
+.form-input:focus,.form-textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(30,94,255,.1)}
+.form-input.error,.form-textarea.error{border-color:#e53e3e}
+.form-err{font-size:.78rem;color:#e53e3e;margin-top:4px}
+.form-textarea{resize:vertical;min-height:110px;line-height:1.6}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* ── CTA BANNER ── */
+.cta-banner{background:linear-gradient(135deg,var(--navy),#1a3a70 60%,#0d2a56);border-radius:var(--r-xl);padding:44px 40px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;position:relative;overflow:hidden}
+.cta-banner::before{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(30,94,255,.25) 0%,transparent 65%)}
+.cta-banner::after{content:'';position:absolute;left:30%;bottom:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(17,181,164,.2) 0%,transparent 65%)}
+.cta-banner .cta-text h2{font-family:var(--ff-h);font-weight:800;font-size:1.6rem;color:#fff;line-height:1.3}
+.cta-banner .cta-text p{color:rgba(255,255,255,.65);margin-top:8px;font-size:.95rem}
+.cta-banner-actions{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
+
+/* ── HOW IT WORKS ── */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.steps-grid::before{content:'';position:absolute;top:30px;left:calc(12.5% + 16px);right:calc(12.5% + 16px);height:2px;background:linear-gradient(90deg,var(--primary),var(--teal));z-index:0;opacity:.3}
+.step-card{position:relative;z-index:1}
+.step-num{width:42px;height:42px;border-radius:50%;margin-bottom:16px;background:linear-gradient(135deg,var(--primary),var(--teal));color:#fff;font-family:var(--ff-h);font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(30,94,255,.3)}
+
+/* ── TESTIMONIALS ── */
+.carousel-wrap{position:relative;overflow:hidden}
+.carousel-track{display:flex;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.carousel-slide{min-width:100%;padding:4px}
+.quote-icon{color:var(--primary);opacity:.25;margin-bottom:12px}
+.testi-card .quote{font-size:1rem;line-height:1.75;color:var(--text);font-style:italic;margin-bottom:20px}
+.testi-card .author{font-family:var(--ff-h);font-weight:700;color:var(--navy);font-size:.9rem}
+.testi-card .meta{font-size:.8rem;color:var(--muted);margin-top:2px}
+.stars{display:flex;gap:3px;margin-bottom:14px}
+.stars svg{color:var(--warm)}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s,width .2s}
+.carousel-dot.active{background:var(--primary);width:22px;border-radius:4px}
+.carot-btn{width:38px;height:38px;border-radius:var(--r-sm);background:var(--surface);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--navy);transition:all .2s;cursor:pointer}
+.carot-btn:hover{background:#f0f4ff;border-color:var(--primary);color:var(--primary)}
+
+/* ── FOOTER ── */
+.site-footer{border-top:1.5px solid var(--border);background:rgba(255,255,255,.6);backdrop-filter:blur(12px);padding:52px 0 28px}
+.footer-top{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;margin-bottom:44px;flex-wrap:wrap}
+.footer-links-group h4{font-family:var(--ff-h);font-weight:700;font-size:.85rem;color:var(--navy);margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em}
+.footer-links-group a,.footer-links-group button{display:block;font-size:.875rem;color:var(--muted);padding:4px 0;transition:color .2s;background:none;border:none;cursor:pointer;text-align:left}
+.footer-links-group a:hover,.footer-links-group button:hover{color:var(--primary)}
+.footer-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;border-top:1.5px solid var(--border)}
+.footer-bot p{font-size:.825rem;color:var(--muted)}
+.footer-legal{display:flex;gap:20px}
+.footer-legal button{font-size:.825rem;color:var(--muted);background:none;border:none;cursor:pointer;transition:color .2s;text-decoration:underline;text-underline-offset:2px}
+.footer-legal button:hover{color:var(--primary)}
+
+/* ── FLOAT BUTTONS ── */
+.float-wa{position:fixed;bottom:22px;left:22px;z-index:150;display:flex;align-items:center;gap:8px;padding:11px 18px;border-radius:100px;background:var(--navy);color:#fff;font-size:.85rem;font-weight:600;box-shadow:0 6px 24px rgba(11,27,58,.3);transition:transform .2s,box-shadow .2s;text-decoration:none}
+.float-wa:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(11,27,58,.35)}
+.float-top{position:fixed;bottom:22px;right:22px;z-index:150;width:42px;height:42px;border-radius:var(--r-sm);background:rgba(255,255,255,.85);backdrop-filter:blur(8px);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--navy);box-shadow:var(--sh);transition:transform .2s,box-shadow .2s,opacity .3s;opacity:0;pointer-events:none;cursor:pointer}
+.float-top.visible{opacity:1;pointer-events:auto}
+.float-top:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ─────────────────────────────────────────────────
+   CART DRAWER
+───────────────────────────────────────────────── */
+.cart-drawer-overlay{position:fixed;inset:0;z-index:400;background:rgba(11,27,58,.4);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s}
+.cart-drawer-overlay.open{opacity:1;pointer-events:auto}
+.cart-drawer{position:fixed;top:0;right:0;height:100%;width:min(92%,420px);background:var(--surface);z-index:401;transform:translateX(100%);transition:transform .35s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(11,27,58,.15);border-radius:var(--r-lg) 0 0 var(--r-lg)}
+.cart-drawer.open{transform:translateX(0)}
+.cart-drawer-header{display:flex;align-items:center;justify-content:space-between;padding:24px 24px 16px;border-bottom:1.5px solid var(--border);flex-shrink:0}
+.cart-drawer-header h2{font-family:var(--ff-h);font-weight:700;font-size:1.1rem;color:var(--navy);display:flex;align-items:center;gap:8px}
+.cart-clear-btn{font-size:.8rem;color:var(--muted);background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:4px;transition:color .2s}
+.cart-clear-btn:hover{color:#e53e3e}
+.cart-body{flex:1;overflow-y:auto;padding:16px 24px}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;height:100%;text-align:center;color:var(--muted)}
+.cart-empty svg{opacity:.2}
+.cart-item{display:flex;align-items:flex-start;gap:12px;padding:14px;border:1.5px solid var(--border);border-radius:var(--r);margin-bottom:12px;background:rgba(255,255,255,.8)}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-title{font-family:var(--ff-h);font-weight:700;font-size:.88rem;color:var(--navy);line-height:1.3;margin-bottom:4px}
+.cart-item-sub{font-size:.75rem;color:var(--muted)}
+.cart-item-price{font-family:var(--ff-h);font-weight:700;color:var(--primary);font-size:.95rem;margin-top:6px}
+.cart-item-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.cart-rm-btn{color:var(--muted);background:none;border:none;cursor:pointer;transition:color .2s;padding:0}
+.cart-rm-btn:hover{color:#e53e3e}
+.qty-ctrl{display:flex;align-items:center;border:1.5px solid var(--border);border-radius:var(--r-sm);overflow:hidden}
+.qty-ctrl button{width:30px;height:28px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;color:var(--navy);background:none;border:none;cursor:pointer;transition:background .2s}
+.qty-ctrl button:hover{background:var(--bg)}
+.qty-ctrl span{min-width:32px;text-align:center;font-size:.875rem;font-weight:600;color:var(--navy)}
+.cart-note-area{margin-top:16px}
+.cart-note-area label{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px}
+.cart-note-area textarea{width:100%;border-radius:var(--r-sm);border:1.5px solid var(--border);padding:10px 14px;font-size:.875rem;font-family:var(--ff-b);color:var(--text);resize:none;min-height:72px;outline:none;transition:border-color .2s}
+.cart-note-area textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(30,94,255,.1)}
+.cart-footer{padding:16px 24px 24px;border-top:1.5px solid var(--border);flex-shrink:0;background:rgba(248,250,255,.8)}
+.cart-subtotal{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.cart-subtotal .label{font-size:.9rem;color:var(--muted)}
+.cart-subtotal .amount{font-family:var(--ff-h);font-weight:800;font-size:1.2rem;color:var(--navy)}
+.cart-checkout-note{font-size:.75rem;color:var(--muted);text-align:center;margin-top:10px}
+
+/* ─────────────────────────────────────────────────
+   MODAL (Legal)
+───────────────────────────────────────────────── */
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(11,27,58,.45);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal-box{background:var(--surface);border-radius:var(--r-xl);box-shadow:var(--sh-lg);max-width:560px;width:100%;max-height:80vh;display:flex;flex-direction:column;transform:scale(.95) translateY(16px);transition:transform .25s;padding:0;overflow:hidden}
+.modal-overlay.open .modal-box{transform:scale(1) translateY(0)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:24px 28px 0;flex-shrink:0}
+.modal-header h2{font-family:var(--ff-h);font-weight:700;font-size:1.25rem;color:var(--navy)}
+.modal-body{padding:16px 28px 28px;overflow-y:auto;flex:1}
+.modal-body p{font-size:.9rem;color:var(--muted);line-height:1.75;white-space:pre-line}
+
+/* ─────────────────────────────────────────────────
+   TOAST
+───────────────────────────────────────────────── */
+.toast-container{position:fixed;bottom:80px;right:24px;z-index:600;display:flex;flex-direction:column-reverse;gap:10px;pointer-events:none;max-width:340px}
+.toast{background:var(--navy);color:#fff;border-radius:var(--r);padding:14px 18px;font-size:.875rem;font-weight:500;box-shadow:0 8px 24px rgba(11,27,58,.3);transform:translateX(120%);transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .35s;opacity:0;pointer-events:auto;display:flex;align-items:flex-start;gap:10px}
+.toast.show{transform:translateX(0);opacity:1}
+.toast.error{background:linear-gradient(135deg,#c53030,#e53e3e)}
+.toast-icon{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.toast-content{flex:1}
+.toast-title{font-weight:700;font-size:.88rem;line-height:1.3}
+.toast-desc{font-size:.8rem;color:rgba(255,255,255,.75);margin-top:2px;line-height:1.4}
+
+/* ─────────────────────────────────────────────────
+   REGIONS GRID
+───────────────────────────────────────────────── */
+.region-mini{background:rgba(255,255,255,.8);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 16px;transition:border-color .2s,transform .2s}
+.region-mini:hover{border-color:var(--primary);transform:translateY(-2px)}
+.region-mini .r-name{font-weight:600;font-size:.875rem;color:var(--navy)}
+.region-mini .r-sub{font-size:.75rem;color:var(--muted);margin-top:3px}
+
+/* ─────────────────────────────────────────────────
+   QUIZ
+───────────────────────────────────────────────── */
+.quiz-select{width:100%;padding:10px 36px 10px 16px;border-radius:var(--r);border:1.5px solid var(--border);background:var(--surface);font-size:.9rem;color:var(--text);outline:none;font-family:var(--ff-b);transition:border-color .2s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235A6A8A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
+.quiz-select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(30,94,255,.1)}
+.quiz-result{background:linear-gradient(135deg,rgba(30,94,255,.06),rgba(17,181,164,.06));border:1.5px solid rgba(30,94,255,.2);border-radius:var(--r);padding:20px;margin-top:16px;display:none;animation:fadeInUp .4s ease}
+.quiz-result.show{display:block}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ─────────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────────── */
+@media(max-width:960px){
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .steps-grid{grid-template-columns:repeat(2,1fr)}
+  .steps-grid::before{display:none}
+}
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-card-wrap{display:none}
+  .g2,.g3{grid-template-columns:1fr}
+  .g4{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hdr-actions .btn-lg-only{display:none}
+  .hamburger{display:flex}
+  .form-grid{grid-template-columns:1fr}
+  .footer-top{flex-direction:column;gap:28px}
+  .section-head-row{flex-direction:column;align-items:flex-start}
+  .cta-banner{padding:32px 24px}
+  .trust-div{display:none}
+  h1.hero-title{font-size:2.1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ CONSTANTS (edit here) ═══════════════════════════════════════════ -->
+<script>
+const CONTACT = {
+  email: "ndindasharon9@gmail.com",
+  phone: "070366879",
+  whatsappWaMe: "25470366879",    // international format, no +
+  whatsappDisplay: "+254 703 668 79"
+}
+const BOOKING_EMBED_URL = "https://calendar.google.com/calendar/appointments/schedules/AcZssZ2B8DLKXdguUj5rSlKtyGK5jVGQ5ErsQPq74atqR0kGwDfpoBswKRfkkAflg4CofJpt4c46VH1a?gv=true"
+const HEADER_OFFSET = 76
+</script>
+
+<!-- ── Scroll progress ── -->
+<div id="prog" aria-hidden="true"></div>
+
+<!-- ═══ HEADER ════════════════════════════════════════════════════════════ -->
+<header id="site-header" role="banner">
+  <div class="hdr-inner">
+    <!-- Logo -->
+    <button class="logo" onclick="navTo('home')" aria-label="BlueBridge Global Prep – go to top">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      BlueBridge Global Prep
+    </button>
+
+    <!-- Desktop nav -->
+    <nav class="nav-links" aria-label="Main navigation">
+      <button onclick="navTo('home')"    data-nav="home">Home</button>
+      <button onclick="navTo('test')"    data-nav="test">Test Prep</button>
+      <button onclick="navTo('abroad')"  data-nav="abroad">Study Abroad</button>
+      <button onclick="navTo('pricing')" data-nav="pricing">Pricing</button>
+      <button onclick="navTo('shop')"    data-nav="shop">Shop</button>
+      <button onclick="navTo('mock')"    data-nav="mock">Mock Eval</button>
+      <button onclick="navTo('stories')" data-nav="stories">Success</button>
+      <button onclick="navTo('book')"    data-nav="book">Book</button>
+      <button onclick="navTo('contact')" data-nav="contact">Contact</button>
+    </nav>
+
+    <!-- Actions -->
+    <div class="hdr-actions">
+      <!-- Cart -->
+      <button class="cart-pill" onclick="openCart()" aria-label="Open shopping cart">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Cart
+        <span class="cart-badge" id="hdr-cart-badge" aria-live="polite" aria-atomic="true">0</span>
+      </button>
+      <!-- Book CTA (hidden on mobile) -->
+      <button class="btn btn-primary btn-sm btn-lg-only" onclick="navTo('book')">
+        Book a call
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <!-- Hamburger -->
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-slideover">
+        <span class="bar1"></span><span class="bar2"></span><span class="bar3"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ MOBILE SLIDE-OVER ══════════════════════════════════════════════════ -->
+<div class="overlay" id="overlay" onclick="toggleMenu()" aria-hidden="true"></div>
+<nav class="slideover" id="mobile-slideover" aria-label="Mobile navigation">
+  <div class="slideover-header">
+    <button class="logo" onclick="navTo('home');toggleMenu()" aria-label="Go to homepage">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      BlueBridge
+    </button>
+    <button class="close-btn" onclick="toggleMenu()" aria-label="Close menu">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="slideover-links" id="mobile-links">
+    <button onclick="navTo('home');toggleMenu()"    data-mnav="home">Home <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <button onclick="navTo('test');toggleMenu()"    data-mnav="test">Test Prep <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <button onclick="navTo('abroad');toggleMenu()"  data-mnav="abroad">Study Abroad <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <button onclick="navTo('pricing');toggleMenu()" data-mnav="pricing">Pricing <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <button onclick="navTo('shop');toggleMenu()"    data-mnav="shop">Shop <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <button onclick="navTo('mock');toggleMenu()"    data-mnav="mock">Mock Eval <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <button onclick="navTo('stories');toggleMenu()" data-mnav="stories">Success Stories <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <button onclick="navTo('book');toggleMenu()"    data-mnav="book">Book a Call <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <button onclick="navTo('contact');toggleMenu()" data-mnav="contact">Contact <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
+  <div style="margin-top:20px">
+    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="navTo('book');toggleMenu()">
+      Book free call
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ CART DRAWER ════════════════════════════════════════════════════════ -->
+<div class="cart-drawer-overlay" id="cart-overlay" onclick="closeCart()" aria-hidden="true"></div>
+<aside class="cart-drawer" id="cart-drawer" aria-label="Shopping cart" role="dialog" aria-modal="true">
+  <div class="cart-drawer-header">
+    <h2>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Shopping Cart
+      <span id="cart-drawer-count" class="badge badge-primary" aria-live="polite">0 items</span>
+    </h2>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="cart-clear-btn" id="cart-clear-btn" onclick="clearCart()" aria-label="Clear all cart items" style="display:none">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+        Clear all
+      </button>
+      <button class="close-btn" onclick="closeCart()" aria-label="Close cart">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="cart-body" id="cart-body">
+    <!-- populated by JS -->
+  </div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="cart-subtotal">
+      <span class="label">Subtotal</span>
+      <span class="amount" id="cart-subtotal">KES 0</span>
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center;gap:8px" onclick="checkoutWhatsApp()" aria-label="Checkout via WhatsApp">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Order via WhatsApp
+    </button>
+    <p class="cart-checkout-note">We'll confirm availability & payment on WhatsApp.</p>
+  </div>
+</aside>
+
+<!-- ═══ LEGAL MODALS ═══════════════════════════════════════════════════════ -->
+<!-- Privacy -->
+<div class="modal-overlay" id="modal-privacy" role="dialog" aria-modal="true" aria-labelledby="modal-privacy-title" onclick="closeModal('privacy')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h2 id="modal-privacy-title">Privacy Policy</h2>
+      <button class="close-btn" onclick="closeModal('privacy')" aria-label="Close privacy policy">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body"><p id="privacy-text"></p></div>
+  </div>
+</div>
+<!-- Terms -->
+<div class="modal-overlay" id="modal-terms" role="dialog" aria-modal="true" aria-labelledby="modal-terms-title" onclick="closeModal('terms')">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <h2 id="modal-terms-title">Terms of Service</h2>
+      <button class="close-btn" onclick="closeModal('terms')" aria-label="Close terms of service">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body"><p id="terms-text"></p></div>
+  </div>
+</div>
+
+<!-- ═══ TOAST CONTAINER ════════════════════════════════════════════════════ -->
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+<!-- ═══ MAIN ═══════════════════════════════════════════════════════════════ -->
+<main>
+
+<!-- ── HERO ── -->
+<section id="home" class="section" style="padding-top:72px;padding-bottom:72px;position:relative;overflow:hidden">
+  <div class="mesh" aria-hidden="true"><span class="m1"></span><span class="m2"></span><span class="m3"></span></div>
+  <div class="container">
+    <div class="hero-inner">
+      <div class="reveal">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px">
+          <span class="pill pill-teal">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            British Council Certified
+          </span>
+          <span class="pill pill-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Score-Focused Coaching
+          </span>
+          <span class="pill">Kenya-based · Online + In-person</span>
+        </div>
+        <h1 class="hero-title">
+          Get the <span class="hl">score.</span><br>
+          Get the <span class="hl">offer.</span><br>
+          Go global.
+        </h1>
+        <p class="hero-desc">We help students and professionals across Kenya prepare for IELTS, TOEFL, and PTE — plus full study abroad guidance, premium materials, and expert mock evaluations.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-lg" onclick="navTo('book')">
+            Book a free consultation
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <button class="btn btn-outline btn-lg" onclick="navTo('test')">Explore classes</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-card reveal d1"><div class="stat-val" data-count="1000" data-suffix="+">0+</div><div class="stat-lbl">Students supported</div></div>
+          <div class="stat-card reveal d2"><div class="stat-val">+1 Band</div><div class="stat-lbl">Avg. improvement</div></div>
+          <div class="stat-card reveal d3"><div class="stat-val" style="color:var(--teal)">Online</div><div class="stat-lbl">Worldwide support</div></div>
+        </div>
+      </div>
+      <div class="hero-card-wrap reveal d2">
+        <div class="hero-card">
+          <div class="hc-row">
+            <div class="hc-mini"><div class="label">Test Prep</div><div class="value">IELTS / TOEFL / PTE</div></div>
+            <div class="hc-mini"><div class="label">Study Abroad</div><div class="value">SOP · Applications · Visa</div></div>
+          </div>
+          <div class="hc-banner">
+            <div><div class="b-text">Mock Evaluation</div><div class="b-sub">Band estimate + improvement plan</div></div>
+            <div style="width:38px;height:38px;border-radius:var(--r-sm);background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2.5" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+          </div>
+          <div class="hc-trio">
+            <div class="hc-trio-item"><div class="t-label">Writing</div><div class="t-val">Feedback</div></div>
+            <div class="hc-trio-item"><div class="t-label">Speaking</div><div class="t-val">Simulation</div></div>
+            <div class="hc-trio-item"><div class="t-label">Materials</div><div class="t-val">Bundles</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Trust bar -->
+    <div class="trust-bar reveal">
+      <div class="trust-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Certified Trainers</div>
+      <div class="trust-div" aria-hidden="true"></div>
+      <div class="trust-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg> Structured Study Plans</div>
+      <div class="trust-div" aria-hidden="true"></div>
+      <div class="trust-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Real Exam Strategies</div>
+      <div class="trust-div" aria-hidden="true"></div>
+      <div class="trust-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> M-Pesa &amp; Card Accepted</div>
+      <div class="trust-div" aria-hidden="true"></div>
+      <div class="trust-item"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Online Worldwide</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="section-head reveal section-head-row">
+      <div>
+        <span class="eyebrow">Services</span>
+        <h2>Everything you need to prepare and go global.</h2>
+        <p>Classes, 1:1 coaching, study abroad support, materials, and mock evaluations.</p>
+      </div>
+      <button class="btn btn-primary" onclick="navTo('book')">Talk to us <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+    <div class="grid g4">
+      <div class="card card-pad card-top reveal d1" style="cursor:pointer" onclick="navTo('test')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')navTo('test')">
+        <div class="icon-box icon-box-p"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;font-size:1.1rem;color:var(--navy);margin-bottom:10px">Test Prep</h3>
+        <p style="font-size:.875rem;color:var(--muted);line-height:1.65;margin-bottom:18px">IELTS, TOEFL, PTE classes with strategy, practice, and examiner-style feedback.</p>
+        <ul class="check-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Group classes &amp; 1:1 coaching</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Placement test</span></li>
+        </ul>
+        <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center" onclick="event.stopPropagation();navTo('test')">Explore Test Prep</button>
+      </div>
+      <div class="card card-pad reveal d2" style="cursor:pointer" onclick="navTo('abroad')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')navTo('abroad')">
+        <div class="icon-box icon-box-t"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5" aria-hidden="true"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;font-size:1.1rem;color:var(--navy);margin-bottom:10px">Study Abroad</h3>
+        <p style="font-size:.875rem;color:var(--muted);line-height:1.65;margin-bottom:18px">School selection, SOP, applications, and visa interview preparation.</p>
+        <ul class="check-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Shortlist programs</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>SOP &amp; CV review</span></li>
+        </ul>
+        <button class="btn btn-teal btn-sm" style="width:100%;justify-content:center" onclick="event.stopPropagation();navTo('abroad')">Explore Study Abroad</button>
+      </div>
+      <div class="card card-pad reveal d3" style="cursor:pointer" onclick="navTo('shop')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')navTo('shop')">
+        <div class="icon-box icon-box-n"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.5" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;font-size:1.1rem;color:var(--navy);margin-bottom:10px">Materials</h3>
+        <p style="font-size:.875rem;color:var(--muted);line-height:1.65;margin-bottom:18px">Templates, vocabulary packs, vocab lists and mock sets for self-study.</p>
+        <ul class="check-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Writing templates &amp; vocab packs</span></li>
+        </ul>
+        <button class="btn btn-outline btn-sm" style="width:100%;justify-content:center" onclick="event.stopPropagation();navTo('shop')">Browse Shop</button>
+      </div>
+      <div class="card card-pad card-top-warm reveal d4" style="cursor:pointer" onclick="navTo('mock')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')navTo('mock')">
+        <div class="icon-box icon-box-w"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;font-size:1.1rem;color:var(--navy);margin-bottom:10px">Mock Evaluation</h3>
+        <p style="font-size:.875rem;color:var(--muted);line-height:1.65;margin-bottom:18px">Band estimate, mistake analysis, and improvement plan.</p>
+        <ul class="check-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Writing marking &amp; speaking review</span></li>
+        </ul>
+        <button class="btn btn-warm btn-sm" style="width:100%;justify-content:center" onclick="event.stopPropagation();navTo('mock')">Book Evaluation</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section" style="background:rgba(11,27,58,.03);border-top:1.5px solid var(--border);border-bottom:1.5px solid var(--border)">
+  <div class="container">
+    <div class="section-head reveal" style="text-align:center;max-width:600px;margin:0 auto 44px">
+      <span class="eyebrow">How it Works</span>
+      <h2>A simple process that gets results.</h2>
+      <p>Clear steps from your current level to your target score and your next move abroad.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="card card-pad step-card reveal d1">
+        <div class="step-num" aria-hidden="true">1</div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:10px">Free Consult</h3>
+        <p style="color:var(--muted);font-size:.875rem;line-height:1.65">We understand your goal, timeline, and target score or program.</p>
+      </div>
+      <div class="card card-pad step-card reveal d2">
+        <div class="step-num" aria-hidden="true">2</div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:10px">Diagnostic + Plan</h3>
+        <p style="color:var(--muted);font-size:.875rem;line-height:1.65">We map your band-gap and build a focused study roadmap tailored to you.</p>
+      </div>
+      <div class="card card-pad step-card reveal d3">
+        <div class="step-num" aria-hidden="true">3</div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:10px">Training + Materials</h3>
+        <p style="color:var(--muted);font-size:.875rem;line-height:1.65">Classes or coaching plus curated materials that accelerate your progress.</p>
+      </div>
+      <div class="card card-pad step-card reveal d4">
+        <div class="step-num" aria-hidden="true">4</div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:10px">Mock + Refine</h3>
+        <p style="color:var(--muted);font-size:.875rem;line-height:1.65">We evaluate, correct, and refine until you're fully exam-ready.</p>
+      </div>
+    </div>
+    <div class="cta-banner reveal" style="margin-top:32px">
+      <div class="cta-text"><h2>Not sure where to start?</h2><p>Book a free consultation — we'll recommend the best plan for your goal.</p></div>
+      <div class="cta-banner-actions">
+        <button class="btn btn-warm btn-lg" onclick="navTo('book')">Book now <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        <button class="btn btn-ghost" onclick="navTo('pricing')">View pricing</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TEST PREP ── -->
+<section id="test" class="section">
+  <div class="container">
+    <div class="section-head reveal section-head-row">
+      <div>
+        <span class="eyebrow">Test Prep</span>
+        <h2>IELTS, TOEFL, and PTE — taught the right way.</h2>
+        <p>Choose your exam and see course options, outcomes, and what's included.</p>
+      </div>
+      <button class="btn btn-outline" onclick="navTo('book')">Book placement test</button>
+    </div>
+    <div class="tab-bar reveal" role="tablist" aria-label="Exam type">
+      <button class="tab-btn active" role="tab" aria-selected="true"  onclick="setExam('IELTS',this)">IELTS</button>
+      <button class="tab-btn"        role="tab" aria-selected="false" onclick="setExam('TOEFL',this)">TOEFL</button>
+      <button class="tab-btn"        role="tab" aria-selected="false" onclick="setExam('PTE',this)">PTE</button>
+    </div>
+    <div class="grid g3 reveal" id="exam-panels">
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:12px">Who it's for</h3>
+        <p id="exam-who" style="color:var(--muted);font-size:.9rem;line-height:1.7">Students &amp; professionals targeting UK, Canada, Australia and scholarships requiring Academic or General IELTS.</p>
+      </div>
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:16px">Course Options</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(255,255,255,.8);border:1.5px solid var(--border);border-radius:var(--r)">
+            <span id="exam-group-label" style="font-size:.875rem;color:var(--muted)">Group class (package)</span>
+            <span id="exam-group-price" style="font-family:var(--ff-h);font-weight:700;color:var(--primary);font-size:.9rem">KES 12,000</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(255,255,255,.8);border:1.5px solid var(--border);border-radius:var(--r)">
+            <span style="font-size:.875rem;color:var(--muted)">1:1 coaching (per session)</span>
+            <span id="exam-solo-price" style="font-family:var(--ff-h);font-weight:700;color:var(--primary);font-size:.9rem">KES 4,500</span>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center" onclick="navTo('book')">Book placement test</button>
+      </div>
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:16px">Outcomes</h3>
+        <ul class="check-list">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Band-gap diagnostic from day one</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Writing correction + rewrite plan</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Speaking drills + examiner criteria</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Full mock evaluation before exam day</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STUDY ABROAD ── -->
+<section id="abroad" class="section" style="background:linear-gradient(180deg,rgba(17,181,164,.04) 0%,transparent 100%);border-top:1.5px solid var(--border)">
+  <div class="container">
+    <div class="section-head reveal section-head-row">
+      <div>
+        <span class="eyebrow">Study Abroad</span>
+        <h2>Admissions support that feels organised and calm.</h2>
+        <p>From program selection to SOP review and visa interview practice.</p>
+      </div>
+      <button class="btn btn-teal" onclick="navTo('book')">Book admissions consult</button>
+    </div>
+    <div class="grid g2 reveal">
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:6px">Regions We Support</h3>
+        <p style="color:var(--muted);font-size:.875rem;margin-bottom:18px">UK · Canada · USA · Australia · Europe · and more</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="region-mini"><div class="r-name">🇬🇧 United Kingdom</div><div class="r-sub">Schools + CAS planning</div></div>
+          <div class="region-mini"><div class="r-name">🇨🇦 Canada</div><div class="r-sub">Programs + SDS guidance</div></div>
+          <div class="region-mini"><div class="r-name">🇺🇸 USA</div><div class="r-sub">TOEFL + essays</div></div>
+          <div class="region-mini"><div class="r-name">🇦🇺 Australia</div><div class="r-sub">GTE + documents</div></div>
+          <div class="region-mini"><div class="r-name">🇪🇺 Europe</div><div class="r-sub">Scholarship routes</div></div>
+          <div class="region-mini"><div class="r-name">🌐 Online</div><div class="r-sub">From anywhere</div></div>
+        </div>
+      </div>
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:6px">Eligibility Checker</h3>
+        <p style="color:var(--muted);font-size:.875rem;margin-bottom:18px">Answer 3 quick questions to get a recommended plan.</p>
+        <div class="form-grid" style="margin-bottom:14px">
+          <div class="form-group"><label for="q-goal">Goal</label>
+            <select id="q-goal" class="quiz-select" onchange="runQuiz()">
+              <option value="">Select</option><option value="study">Study</option><option value="work">Work</option><option value="both">Both</option>
+            </select>
+          </div>
+          <div class="form-group"><label for="q-budget">Budget</label>
+            <select id="q-budget" class="quiz-select" onchange="runQuiz()">
+              <option value="">Select</option><option value="low">Low</option><option value="mid">Mid</option><option value="high">High</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label for="q-timeline">Timeline</label>
+          <select id="q-timeline" class="quiz-select" onchange="runQuiz()">
+            <option value="">Select</option><option value="0-3">0–3 months</option><option value="3-6">3–6 months</option><option value="6+">6+ months</option>
+          </select>
+        </div>
+        <div class="quiz-result" id="quiz-result">
+          <h4 id="quiz-title" style="font-family:var(--ff-h);font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:12px">Recommended Plan</h4>
+          <ul class="check-list" id="quiz-bullets" style="margin-bottom:14px"></ul>
+          <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center" onclick="navTo('book')">Book a Consult</button>
+        </div>
+        <div id="quiz-placeholder" style="background:rgba(30,94,255,.04);border:1.5px dashed rgba(30,94,255,.2);border-radius:var(--r);padding:16px;text-align:center">
+          <p style="font-size:.85rem;color:var(--muted)">Select all fields to see your recommended plan.</p>
+        </div>
+      </div>
+    </div>
+    <div class="grid g3 reveal" style="margin-top:20px">
+      <div class="card card-pad card-top">
+        <div class="icon-box icon-box-p"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:8px">School Selection + Shortlist</h3>
+        <p style="color:var(--muted);font-size:.875rem;line-height:1.65">Delivered with clear timelines, checklists, and reviewer-style feedback.</p>
+      </div>
+      <div class="card card-pad card-top">
+        <div class="icon-box icon-box-t"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:8px">SOP / Essay + CV Review</h3>
+        <p style="color:var(--muted);font-size:.875rem;line-height:1.65">Sharp, honest editing that strengthens your application story and structure.</p>
+      </div>
+      <div class="card card-pad card-top">
+        <div class="icon-box icon-box-w"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--warm)" stroke-width="2.5" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:8px">Visa Interview Prep</h3>
+        <p style="color:var(--muted);font-size:.875rem;line-height:1.65">Practice sessions with real interview scenarios, mock Q&amp;A, and confidence coaching.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section id="pricing" class="section">
+  <div class="container">
+    <div class="section-head reveal section-head-row">
+      <div>
+        <span class="eyebrow">Pricing</span>
+        <h2>Clear pricing, flexible options.</h2>
+        <p>All prices in KES. Toggle between package and monthly views.</p>
+      </div>
+      <div class="price-toggle" role="group" aria-label="Pricing period">
+        <button class="t-opt active" onclick="setPricing('package',this)" aria-pressed="true">Package</button>
+        <button class="t-opt"        onclick="setPricing('monthly',this)" aria-pressed="false">Monthly</button>
+      </div>
+    </div>
+    <div class="grid g3 reveal">
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);font-size:1.15rem;margin-bottom:6px">IELTS Group Class</h3>
+        <p style="color:var(--muted);font-size:.875rem;margin-bottom:20px">Structured lessons + practice + feedback.</p>
+        <p class="price-big" id="price-group">KES 12,000</p>
+        <ul class="check-list" style="margin:20px 0">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>8 guided sessions</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Weekly homework + marking</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Progress tracking</span></li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="navTo('book')">Book placement test</button>
+      </div>
+      <div class="card card-pad price-card featured" style="position:relative">
+        <div style="position:absolute;top:16px;right:16px"><span class="badge badge-warm">⭐ Most Popular</span></div>
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);font-size:1.15rem;margin-bottom:6px">IELTS 1:1 Coaching</h3>
+        <p style="color:var(--muted);font-size:.875rem;margin-bottom:20px">Personalised plan with deep feedback.</p>
+        <p class="price-big" id="price-1to1">KES 4,500</p><span style="font-size:.8rem;color:var(--muted);font-weight:500"> / session</span>
+        <ul class="check-list" style="margin:20px 0">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Custom band-gap analysis</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Writing correction + rewrite plan</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Speaking simulation</span></li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;gap:8px" onclick="navTo('book')">Book a consultation <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+      </div>
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);font-size:1.15rem;margin-bottom:6px">Study Abroad Support</h3>
+        <p style="color:var(--muted);font-size:.875rem;margin-bottom:20px">From school selection to visa prep.</p>
+        <p class="price-big" id="price-abroad">KES 45,000</p>
+        <ul class="check-list" style="margin:20px 0">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Program &amp; school shortlist</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>SOP/Essay &amp; CV review</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Visa prep + interview practice</span></li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="navTo('book')">Talk to an advisor</button>
+      </div>
+    </div>
+    <div class="grid g3 reveal" style="margin-top:20px">
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:14px">Bootcamps</h3>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,.8);border:1.5px solid var(--border);border-radius:var(--r)"><span style="font-size:.85rem;color:var(--muted)">TOEFL Bootcamp</span><span style="font-weight:700;color:var(--primary);font-size:.875rem">KES 18,000</span></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,.8);border:1.5px solid var(--border);border-radius:var(--r)"><span style="font-size:.85rem;color:var(--muted)">PTE Intensive</span><span style="font-weight:700;color:var(--primary);font-size:.875rem">KES 20,000</span></div>
+        </div>
+        <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center" onclick="navTo('book')">Ask about schedule</button>
+      </div>
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:14px">Mock Evaluation</h3>
+        <div style="background:linear-gradient(135deg,rgba(30,94,255,.06),rgba(17,181,164,.06));border:1.5px solid rgba(30,94,255,.15);border-radius:var(--r);padding:16px;margin-bottom:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><span style="font-size:.875rem;color:var(--muted)">Full mock evaluation</span><span style="font-family:var(--ff-h);font-weight:800;color:var(--primary)">KES 3,500</span></div>
+          <p style="font-size:.8rem;color:var(--muted)">Writing or speaking feedback with improvement plan.</p>
+        </div>
+        <button class="btn btn-outline btn-sm" style="width:100%;justify-content:center" onclick="navTo('mock')">See details</button>
+      </div>
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;font-size:1rem;color:var(--navy);margin-bottom:14px">Add-ons</h3>
+        <ul class="check-list" style="margin-bottom:16px">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>SOP/Essay express review</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Visa interview practice</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Extra writing corrections</span></li>
+        </ul>
+        <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center" onclick="navTo('contact')">Request custom quote</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SHOP ── -->
+<section id="shop" class="section" style="background:rgba(11,27,58,.03);border-top:1.5px solid var(--border)">
+  <div class="container">
+    <div class="section-head reveal section-head-row">
+      <div>
+        <span class="eyebrow">Shop Materials</span>
+        <h2>Buy learning materials and practice packs.</h2>
+        <p>Templates, vocabulary packs, mock sets, and bundles for self-study.</p>
+      </div>
+      <button class="btn btn-primary" onclick="openCart()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        View Cart (<span id="shop-cart-count">0</span>)
+      </button>
+    </div>
+    <div class="filter-bar reveal">
+      <div class="search-wrap">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="shop-search" placeholder="Search templates, vocab, mock..." oninput="filterProducts()" aria-label="Search materials"/>
+      </div>
+      <button class="filter-chip active" onclick="filterCat('All',this)" aria-pressed="true">All</button>
+      <button class="filter-chip" onclick="filterCat('IELTS',this)" aria-pressed="false">IELTS</button>
+      <button class="filter-chip" onclick="filterCat('TOEFL',this)" aria-pressed="false">TOEFL</button>
+      <button class="filter-chip" onclick="filterCat('PTE',this)" aria-pressed="false">PTE</button>
+      <button class="filter-chip" onclick="filterCat('Writing',this)" aria-pressed="false">Writing</button>
+      <button class="filter-chip" onclick="filterCat('Vocabulary',this)" aria-pressed="false">Vocabulary</button>
+      <button class="filter-chip" onclick="filterCat('Bundles',this)" aria-pressed="false">Bundles</button>
+    </div>
+    <div class="shop-grid" id="shop-grid" aria-live="polite"></div>
+    <div class="cta-banner reveal" style="margin-top:32px;background:linear-gradient(135deg,var(--teal),var(--primary))">
+      <div class="cta-text"><h2>Bundle &amp; Save</h2><p>Get templates + vocab + one mock evaluation for faster improvement.</p></div>
+      <div class="cta-banner-actions"><button class="btn btn-warm" onclick="navTo('mock')">View Mock Evaluation</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MOCK EVALUATION ── -->
+<section id="mock" class="section">
+  <div class="container">
+    <div class="section-head reveal section-head-row">
+      <div>
+        <span class="eyebrow">Mock Evaluation</span>
+        <h2>Know where you stand before exam day.</h2>
+        <p>Get a band estimate, detailed feedback, mistake analysis, and improvement plan.</p>
+      </div>
+      <button class="btn btn-primary" onclick="navTo('book')">Book Evaluation</button>
+    </div>
+    <div class="grid g2 reveal">
+      <div class="card card-pad card-top">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:16px">What You Receive</h3>
+        <ul class="check-list" style="margin-bottom:20px">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Band estimate / scoring breakdown</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Mistake analysis — what's holding you back</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Improvement plan with exact steps</span></li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>Optional 15-minute feedback call</span></li>
+        </ul>
+        <div style="background:linear-gradient(135deg,rgba(30,94,255,.07),rgba(17,181,164,.07));border:1.5px solid rgba(30,94,255,.2);border-radius:var(--r);padding:18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <span style="font-size:.875rem;color:var(--muted)">Mock Evaluation</span>
+            <span style="font-family:var(--ff-h);font-weight:800;font-size:1.3rem;color:var(--primary)">KES 3,500</span>
+          </div>
+          <p style="font-size:.82rem;color:var(--muted)">Choose writing, speaking, or both.</p>
+          <button class="btn btn-primary btn-sm" style="width:100%;justify-content:center;margin-top:14px;gap:8px" onclick="navTo('book')">Book Now <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </div>
+      </div>
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:6px">Submit a Sample</h3>
+        <p style="color:var(--muted);font-size:.875rem;margin-bottom:20px">Share your work and we'll get back with full feedback.</p>
+        <div class="form-grid">
+          <div class="form-group"><label for="mock-name">Name</label><input id="mock-name" class="form-input" placeholder="Your name"/></div>
+          <div class="form-group"><label for="mock-email">Email</label><input id="mock-email" type="email" class="form-input" placeholder="you@email.com"/></div>
+        </div>
+        <div class="form-group"><label for="mock-exam">Exam</label><input id="mock-exam" class="form-input" placeholder="IELTS / TOEFL / PTE"/></div>
+        <div class="form-group"><label for="mock-sample">Sample link / notes</label><textarea id="mock-sample" class="form-textarea" placeholder="Paste a Google Drive link or describe what you want evaluated..."></textarea></div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="navTo('book')">Proceed to booking</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SUCCESS STORIES ── -->
+<section id="stories" class="section" style="background:linear-gradient(180deg,rgba(30,94,255,.04) 0%,transparent 100%);border-top:1.5px solid var(--border)">
+  <div class="container">
+    <div class="section-head reveal section-head-row">
+      <div>
+        <span class="eyebrow">Success</span>
+        <h2>Real progress, real results.</h2>
+        <p>Stories from students who improved their bands and got their offers.</p>
+      </div>
+    </div>
+    <div class="grid g2 reveal">
+      <div class="card card-pad">
+        <div class="carousel-wrap">
+          <div class="carousel-track" id="carousel-track">
+            <div class="carousel-slide testi-card">
+              <div class="stars" aria-label="5 stars">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div class="quote-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="var(--primary)"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></div>
+              <p class="quote">The feedback on my writing was the turning point. I moved from 6.0 to 7.5 in just four weeks of focused practice.</p>
+              <div class="author">Brian N.</div><div class="meta">IELTS Academic · Nairobi</div>
+            </div>
+            <div class="carousel-slide testi-card">
+              <div class="stars" aria-label="5 stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+              <div class="quote-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="var(--primary)"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></div>
+              <p class="quote">The SOP edits were sharp and honest. I got an offer from my first-choice university and the visa interview prep made the whole process easy.</p>
+              <div class="author">Amina K.</div><div class="meta">Study Abroad · Mombasa → UK</div>
+            </div>
+            <div class="carousel-slide testi-card">
+              <div class="stars" aria-label="5 stars"><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="var(--warm)" stroke="none" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+              <div class="quote-icon" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="var(--primary)"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg></div>
+              <p class="quote">Speaking practice felt completely real — like the actual exam. I finally understood what examiners look for and my score jumped from 6.5 to 8.0.</p>
+              <div class="author">Sharon W.</div><div class="meta">IELTS · Kisumu (Online)</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:20px">
+            <div style="display:flex;gap:6px" id="carousel-dots" role="tablist" aria-label="Testimonials">
+              <button class="carousel-dot active" role="tab" aria-selected="true"  aria-label="Testimonial 1" onclick="goSlide(0)"></button>
+              <button class="carousel-dot"        role="tab" aria-selected="false" aria-label="Testimonial 2" onclick="goSlide(1)"></button>
+              <button class="carousel-dot"        role="tab" aria-selected="false" aria-label="Testimonial 3" onclick="goSlide(2)"></button>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="carot-btn" onclick="prevSlide()" aria-label="Previous testimonial"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="carot-btn" onclick="nextSlide()" aria-label="Next testimonial"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:16px">What We Track</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+          <div style="background:rgba(30,94,255,.05);border:1.5px solid rgba(30,94,255,.15);border-radius:var(--r);padding:14px"><div style="font-weight:600;font-size:.875rem;color:var(--navy)">Writing Progress</div><div style="font-size:.75rem;color:var(--muted);margin-top:4px">Weekly feedback loops</div></div>
+          <div style="background:rgba(17,181,164,.05);border:1.5px solid rgba(17,181,164,.15);border-radius:var(--r);padding:14px"><div style="font-weight:600;font-size:.875rem;color:var(--navy)">Speaking Fluency</div><div style="font-size:.75rem;color:var(--muted);margin-top:4px">Simulation drills</div></div>
+          <div style="background:rgba(255,176,32,.07);border:1.5px solid rgba(255,176,32,.2);border-radius:var(--r);padding:14px"><div style="font-weight:600;font-size:.875rem;color:var(--navy)">Reading Accuracy</div><div style="font-size:.75rem;color:var(--muted);margin-top:4px">Skimming + scanning</div></div>
+          <div style="background:rgba(11,27,58,.05);border:1.5px solid rgba(11,27,58,.1);border-radius:var(--r);padding:14px"><div style="font-weight:600;font-size:.875rem;color:var(--navy)">Listening Speed</div><div style="font-size:.75rem;color:var(--muted);margin-top:4px">Focused audio drills</div></div>
+        </div>
+        <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="navTo('book')">Start your plan</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOK ── -->
+<section id="book" class="section">
+  <div class="container">
+    <div class="section-head reveal section-head-row">
+      <div>
+        <span class="eyebrow">Book a Call</span>
+        <h2>Choose a time that works for you.</h2>
+        <p>Free 15-minute consultation or longer strategy session — online or in-person.</p>
+      </div>
+    </div>
+    <div class="grid g2 reveal" style="align-items:start">
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:16px">Call Types</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px">
+          <div style="padding:16px;background:rgba(30,94,255,.05);border:1.5px solid rgba(30,94,255,.2);border-radius:var(--r)">
+            <div style="font-weight:600;font-size:.9rem;color:var(--navy)">Free Consultation</div>
+            <div style="font-size:.82rem;color:var(--muted);margin-top:6px">15 minutes · Quick recommendation</div>
+          </div>
+          <div style="padding:16px;background:rgba(255,255,255,.8);border:1.5px solid var(--border);border-radius:var(--r)">
+            <div style="font-weight:600;font-size:.9rem;color:var(--navy)">Strategy Session</div>
+            <div style="font-size:.82rem;color:var(--muted);margin-top:6px">30–45 minutes · Deep study plan</div>
+          </div>
+        </div>
+        <a class="btn btn-outline" style="display:inline-flex;width:100%;justify-content:center;gap:8px" href="https://wa.me/25470366879?text=Hi%20BlueBridge!%20I'd%20like%20to%20book%20a%20free%20consultation." target="_blank" rel="noopener noreferrer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Prefer WhatsApp?
+        </a>
+        <!-- Google Calendar Appointment Scheduling button begin -->
+        <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+        <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+        <script>
+        (function() {
+          var target = document.currentScript;
+          window.addEventListener('load', function() {
+            calendar.schedulingButton.load({
+              url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ2B8DLKXdguUj5rSlKtyGK5jVGQ5ErsQPq74atqR0kGwDfpoBswKRfkkAflg4CofJpt4c46VH1a?gv=true',
+              color: '#039BE5',
+              label: 'Book an appointment',
+              target,
+            });
+          });
+        })();
+        </script>
+        <!-- end Google Calendar Appointment Scheduling button -->
+      </div>
+      <div class="card card-pad" style="padding:8px;overflow:hidden">
+        <!-- Google Calendar Appointment Scheduling begin -->
+<iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2B8DLKXdguUj5rSlKtyGK5jVGQ5ErsQPq74atqR0kGwDfpoBswKRfkkAflg4CofJpt4c46VH1a?gv=true" style="border:0;width:100%;height:600px;display:block;border-radius:var(--r-lg)" frameborder="0" loading="lazy" title="Book an appointment with BlueBridge Global Prep"></iframe>
+<!-- end Google Calendar Appointment Scheduling -->
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section" style="background:rgba(11,27,58,.03);border-top:1.5px solid var(--border)">
+  <div class="container">
+    <div class="section-head reveal" style="text-align:center;max-width:600px;margin:0 auto 44px">
+      <span class="eyebrow">FAQ</span>
+      <h2>Common questions.</h2>
+      <p>Fast answers about classes, materials, and study abroad support.</p>
+    </div>
+    <div style="max-width:720px;margin:0 auto" class="reveal">
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">Do you offer online classes?<span class="faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+        <div class="faq-body"><p>Yes. We run live online sessions and can support clients across Kenya and internationally. All you need is a stable internet connection.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">Can I buy materials without joining classes?<span class="faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+        <div class="faq-body"><p>Absolutely. You can buy templates, vocabulary packs, and mock sets independently — then add a mock evaluation when you're ready to benchmark your progress.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">How do I find out my current band / level?<span class="faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+        <div class="faq-body"><p>Book a placement test or request a mock evaluation for writing or speaking. You'll receive a band estimate plus a personalised improvement plan.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">Do you help with SOP writing and visa interview prep?<span class="faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+        <div class="faq-body"><p>Yes. Our study abroad support includes SOP/essay review, application guidance, and dedicated visa interview practice sessions with real scenario Q&amp;A.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)" aria-expanded="false">What payment methods do you accept?<span class="faq-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+        <div class="faq-body"><p>We accept M-Pesa and major debit/credit cards. Payment instructions are shared after you book or order. Contact us via WhatsApp for instant payment assistance.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-head reveal section-head-row">
+      <div>
+        <span class="eyebrow">Contact</span>
+        <h2>Tell us what you need.</h2>
+        <p>Classes, materials, mock evaluation, or study abroad — share your goal and we'll guide you.</p>
+      </div>
+    </div>
+    <div class="grid g2 reveal" style="align-items:start;gap:28px">
+      <div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+          <a class="contact-item" href="mailto:ndindasharon9@gmail.com" aria-label="Send email to BlueBridge">
+            <div class="contact-icon" style="background:rgba(30,94,255,.08)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div style="font-weight:600;font-size:.875rem;color:var(--navy)">Email</div><div style="font-size:.85rem;color:var(--muted)">ndindasharon9@gmail.com</div></div>
+          </a>
+          <a class="contact-item" href="tel:070366879" aria-label="Call BlueBridge">
+            <div class="contact-icon" style="background:rgba(17,181,164,.08)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.06 6.06l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg></div>
+            <div><div style="font-weight:600;font-size:.875rem;color:var(--navy)">Phone</div><div style="font-size:.85rem;color:var(--muted)">070 366 879</div></div>
+          </a>
+          <a class="contact-item" href="https://wa.me/25470366879" target="_blank" rel="noopener noreferrer" aria-label="Chat with BlueBridge on WhatsApp">
+            <div class="contact-icon" style="background:rgba(11,27,58,.06)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div style="flex:1"><div style="font-weight:600;font-size:.875rem;color:var(--navy)">WhatsApp</div><div style="font-size:.85rem;color:var(--muted)">+254 703 668 79 — Chat directly</div></div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div class="cta-banner" style="padding:28px;flex-direction:column;align-items:flex-start">
+          <div class="cta-text"><h2 style="font-size:1.25rem">Book a free consultation</h2><p>Get your exact plan in 15 minutes.</p></div>
+          <button class="btn btn-warm" style="margin-top:16px;position:relative;z-index:1" onclick="navTo('book')">Book a call <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+        </div>
+      </div>
+      <div class="card card-pad">
+        <h3 style="font-family:var(--ff-h);font-weight:700;color:var(--navy);margin-bottom:6px">Send a Message</h3>
+        <p style="color:var(--muted);font-size:.875rem;margin-bottom:20px">Opens your email client with your message pre-filled.</p>
+        <form id="contact-form" novalidate onsubmit="submitContact(event)">
+          <div class="form-grid">
+            <div class="form-group"><label for="cf-name">Name <span class="req" aria-hidden="true">*</span></label><input id="cf-name" name="name" class="form-input" placeholder="Your name" required autocomplete="name"/></div>
+            <div class="form-group"><label for="cf-email">Email <span class="req" aria-hidden="true">*</span></label><input id="cf-email" name="email" type="email" class="form-input" placeholder="you@email.com" required autocomplete="email" aria-describedby="cf-email-err"/><p id="cf-email-err" class="form-err" role="alert" style="display:none"></p></div>
+          </div>
+          <div class="form-group"><label for="cf-service">Service</label><input id="cf-service" name="service" class="form-input" placeholder="IELTS / TOEFL / PTE / Study Abroad / Materials / Mock"/></div>
+          <div class="form-group"><label for="cf-details">Details</label><textarea id="cf-details" name="details" class="form-textarea" placeholder="Tell us your goal, timeline, and target score or program..."></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;gap:8px">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Send message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══════════════════════════════════════════════════════════ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <button class="logo" onclick="navTo('home')" aria-label="BlueBridge Global Prep – go to top" style="margin-bottom:8px">
+          <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          BlueBridge Global Prep
+        </button>
+        <p style="font-size:.82rem;color:var(--muted)">Kenya-based · Online + In-person</p>
+      </div>
+      <div class="footer-links-group">
+        <h4>Test Prep</h4>
+        <button onclick="navTo('test')">IELTS Classes</button>
+        <button onclick="navTo('test')">TOEFL Prep</button>
+        <button onclick="navTo('test')">PTE Intensive</button>
+        <button onclick="navTo('mock')">Mock Evaluation</button>
+      </div>
+      <div class="footer-links-group">
+        <h4>Study Abroad</h4>
+        <button onclick="navTo('abroad')">School Selection</button>
+        <button onclick="navTo('abroad')">SOP / Essay Review</button>
+        <button onclick="navTo('abroad')">Visa Interview Prep</button>
+        <button onclick="navTo('pricing')">Admissions Pricing</button>
+      </div>
+      <div class="footer-links-group">
+        <h4>Company</h4>
+        <button onclick="navTo('stories')">Success Stories</button>
+        <button onclick="navTo('shop')">Materials Shop</button>
+        <button onclick="navTo('book')">Book a Call</button>
+        <button onclick="navTo('contact')">Contact Us</button>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <p>© 2026 BlueBridge Global Prep. All rights reserved.</p>
+      <div class="footer-legal">
+        <button onclick="openModal('privacy')" aria-haspopup="dialog">Privacy Policy</button>
+        <button onclick="openModal('terms')"   aria-haspopup="dialog">Terms of Service</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a class="float-wa" href="https://wa.me/25470366879" target="_blank" rel="noopener noreferrer" aria-label="Chat with BlueBridge on WhatsApp">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  WhatsApp
+</a>
+<button class="float-top" id="float-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<!-- ═══ SCRIPT ═══════════════════════════════════════════════════════════ -->
+<script>
+/* ─────────────────────────────────────────────────
+   DATA
+───────────────────────────────────────────────── */
+const PRODUCTS = [
+  {id:'p1',title:'IELTS Writing Templates Pack',   desc:'Band-boosting structures for Task 1 & Task 2 with annotated examples.',      category:'Writing',    format:'PDF',   price:1200, popular:true},
+  {id:'p2',title:'IELTS Vocabulary Builder',        desc:'High-frequency collocations + topic word-lists (education, work, environment).', category:'Vocabulary', format:'PDF',   price:900},
+  {id:'p3',title:'TOEFL Speaking Prompts + Rubrics',desc:'Practice sets with official scoring rubrics and model answers.',              category:'TOEFL',      format:'PDF',   price:1500},
+  {id:'p4',title:'PTE Core Mock Pack',              desc:'Timed practice sets aligned to PTE task types with strategy notes.',          category:'PTE',        format:'PDF',   price:1800, popular:true},
+  {id:'p5',title:'IELTS Full Mock Bundle',          desc:'Reading + Listening + Writing mock set with complete marking guide.',         category:'Bundles',    format:'PDF',   price:2500},
+  {id:'p6',title:'IELTS Print Practice Book',       desc:'A physical practice workbook delivered locally (Nairobi & major towns).',     category:'IELTS',      format:'Print', price:3000},
+]
+
+const EXAM_DATA = {
+  IELTS: {who:'Students & professionals targeting UK, Canada, Australia and scholarships requiring Academic or General IELTS.', groupLabel:'Group Class Package', group:'KES 12,000', solo:'KES 4,500 / session'},
+  TOEFL: {who:'University applicants aiming for US programs and academic English proficiency certification.',                   groupLabel:'Intensive Course',    group:'KES 18,000', solo:'KES 5,000 / session'},
+  PTE:   {who:'Candidates who want a faster, computer-based test with transparent AI scoring and clear rubrics.',               groupLabel:'PTE Intensive',       group:'KES 20,000', solo:'KES 4,800 / session'},
+}
+
+const PRICING_DATA = {
+  package: {group:'KES 12,000', solo:'KES 4,500 / session', abroad:'KES 45,000'},
+  monthly: {group:'KES 2,000 / mo', solo:'KES 4,050 / session', abroad:'KES 7,500 / mo'},
+}
+
+const LEGAL = {
+  privacy: `Privacy Policy — BlueBridge Global Prep
+Last updated: January 2026
+
+We collect information you provide when booking, purchasing, or contacting us (name, email, phone number). This data is used solely to deliver our services, respond to enquiries, and improve the learning experience. We do not sell or share your personal data with third parties.
+
+Payment data is processed securely via M-Pesa or card providers and is never stored on our servers. We may send occasional service updates or new material announcements; you can opt out at any time by replying STOP or emailing us.
+
+All session and evaluation content is kept confidential. You may request deletion of your data at any time.
+
+For questions or data requests, contact: ${CONTACT.email}`,
+
+  terms: `Terms of Service — BlueBridge Global Prep
+Last updated: January 2026
+
+By using our services or purchasing materials, you agree to the following terms.
+
+Materials purchased are for personal educational use only and may not be redistributed, copied, or resold. Classes and coaching sessions must be booked and paid for in advance. Cancellations require at least 24 hours' notice for a rescheduling credit; no-shows forfeit the session.
+
+Mock evaluations are typically returned with full feedback within 48 hours. Study abroad advisory is guidance-based; BlueBridge does not guarantee university admission or visa approval. Outcomes depend on individual circumstances beyond our control.
+
+All prices are listed in Kenyan Shillings (KES) and may be updated without prior notice. Payments via M-Pesa or card are final; refund requests are handled on a case-by-case basis within 7 days of purchase.
+
+For disputes or questions, contact: ${CONTACT.email}`
+}
+
+/* ─────────────────────────────────────────────────
+   STATE
+───────────────────────────────────────────────── */
+let cart = []
+try { cart = JSON.parse(localStorage.getItem('bb_cart') || '[]') } catch(e){}
+let currentCat = 'All'
+let cartNoteVal = ''
+let slideIdx = 0
+let slideTimer = setInterval(nextSlide, 5000)
+
+/* ─────────────────────────────────────────────────
+   UTILS
+───────────────────────────────────────────────── */
+const fmt = n => `KES ${Number(n).toLocaleString()}`
+
+function saveCart(){ try{ localStorage.setItem('bb_cart', JSON.stringify(cart)) }catch(e){} }
+
+function cartTotal(){ return cart.reduce((s,i) => s + i.price * i.qty, 0) }
+function cartCount(){ return cart.reduce((s,i) => s + i.qty, 0) }
+
+function updateCartUI(){
+  const count = cartCount()
+  document.getElementById('hdr-cart-badge').textContent = count
+  document.getElementById('shop-cart-count').textContent = count
+  document.getElementById('cart-drawer-count').textContent = `${count} item${count !== 1 ? 's' : ''}`
+  document.getElementById('cart-subtotal').textContent = fmt(cartTotal())
+  document.getElementById('cart-clear-btn').style.display = cart.length ? 'flex' : 'none'
+  document.getElementById('cart-footer').style.display = cart.length ? 'block' : 'none'
+  renderCartBody()
+  saveCart()
+}
+
+/* ─────────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────────── */
+function navTo(id){
+  const el = document.getElementById(id)
+  if(!el) return
+  const top = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET
+  window.scrollTo({top, behavior:'smooth'})
+  history.pushState(null, '', '#' + id)
+}
+
+function toggleMenu(){
+  const ham = document.getElementById('hamburger')
+  const ov  = document.getElementById('overlay')
+  const sl  = document.getElementById('mobile-slideover')
+  const isOpen = sl.classList.contains('open')
+  ham.classList.toggle('open', !isOpen)
+  ham.setAttribute('aria-expanded', String(!isOpen))
+  ov.classList.toggle('open', !isOpen)
+  sl.classList.toggle('open', !isOpen)
+  document.body.style.overflow = isOpen ? '' : 'hidden'
+}
+
+/* ESC key — closes menu, cart, and modals */
+document.addEventListener('keydown', e => {
+  if(e.key !== 'Escape') return
+  const sl = document.getElementById('mobile-slideover')
+  const cd = document.getElementById('cart-drawer')
+  if(sl.classList.contains('open')) toggleMenu()
+  if(cd.classList.contains('open')) closeCart()
+  document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'))
+})
+
+/* Scroll: progress bar + header shadow + active nav + back-to-top */
+const SECTION_IDS = ['home','test','abroad','pricing','shop','mock','stories','book','contact']
+
+function onScroll(){
+  const doc = document.documentElement
+  const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100
+  document.getElementById('prog').style.width = pct + '%'
+  document.getElementById('site-header').classList.toggle('scrolled', doc.scrollTop > 60)
+  document.getElementById('float-top').classList.toggle('visible', doc.scrollTop > 400)
+}
+window.addEventListener('scroll', onScroll, {passive:true})
+
+/* IntersectionObserver for active nav */
+const navObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return
+    const id = e.target.id
+    document.querySelectorAll('[data-nav]').forEach(b => b.classList.toggle('active', b.dataset.nav === id))
+    document.querySelectorAll('[data-mnav]').forEach(b => b.classList.toggle('active', b.dataset.mnav === id))
+    history.replaceState(null, '', '#' + id)
+  })
+}, {rootMargin: `-${HEADER_OFFSET}px 0px -50% 0px`, threshold: 0})
+
+SECTION_IDS.forEach(id => { const el = document.getElementById(id); if(el) navObs.observe(el) })
+
+/* Scroll reveal */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); revObs.unobserve(e.target) } })
+}, {threshold: 0.07, rootMargin:'0px 0px -40px 0px'})
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el))
+
+/* Counter */
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return
+    const el = e.target, target = +el.dataset.count, suffix = el.dataset.suffix || ''
+    let v = 0, step = target / 60
+    const t = setInterval(() => { v = Math.min(v + step, target); el.textContent = Math.floor(v).toLocaleString() + suffix; if(v >= target) clearInterval(t) }, 18)
+    cntObs.unobserve(el)
+  })
+}, {threshold:.3})
+document.querySelectorAll('[data-count]').forEach(el => cntObs.observe(el))
+
+/* ─────────────────────────────────────────────────
+   TOAST
+───────────────────────────────────────────────── */
+let toastId = 0
+function showToast(title, desc = '', isError = false){
+  const c = document.getElementById('toast-container')
+  const id = 'toast-' + (++toastId)
+  const icon = isError
+    ? `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
+    : `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`
+  const div = document.createElement('div')
+  div.id = id
+  div.className = 'toast' + (isError ? ' error' : '')
+  div.setAttribute('role', 'status')
+  div.innerHTML = `<div class="toast-icon">${icon}</div><div class="toast-content"><div class="toast-title">${title}</div>${desc ? `<div class="toast-desc">${desc}</div>` : ''}</div>`
+  c.appendChild(div)
+  requestAnimationFrame(() => requestAnimationFrame(() => div.classList.add('show')))
+  setTimeout(() => { div.classList.remove('show'); setTimeout(() => div.remove(), 400) }, 3500)
+}
+
+/* ─────────────────────────────────────────────────
+   CART
+───────────────────────────────────────────────── */
+function openCart(){
+  document.getElementById('cart-drawer').classList.add('open')
+  document.getElementById('cart-overlay').classList.add('open')
+  document.body.style.overflow = 'hidden'
+  updateCartUI()
+}
+function closeCart(){
+  document.getElementById('cart-drawer').classList.remove('open')
+  document.getElementById('cart-overlay').classList.remove('open')
+  document.body.style.overflow = ''
+}
+
+function addToCart(id){
+  const p = PRODUCTS.find(x => x.id === id)
+  if(!p) return
+  const ex = cart.find(x => x.id === id)
+  if(ex) ex.qty++
+  else cart.push({...p, qty:1})
+  updateCartUI()
+  /* bump animation */
+  const badge = document.getElementById('hdr-cart-badge')
+  badge.classList.add('bump')
+  setTimeout(() => badge.classList.remove('bump'), 300)
+  showToast('Added to cart 🛒', p.title)
+}
+
+function incrementItem(id){
+  const item = cart.find(x => x.id === id); if(item) item.qty++
+  updateCartUI()
+}
+function decrementItem(id){
+  const item = cart.find(x => x.id === id); if(!item) return
+  if(item.qty <= 1) removeItem(id)
+  else { item.qty--; updateCartUI() }
+}
+function removeItem(id){
+  const item = cart.find(x => x.id === id)
+  cart = cart.filter(x => x.id !== id)
+  updateCartUI()
+  showToast('Item removed', item ? item.title : '')
+}
+function clearCart(){
+  cart = []; updateCartUI()
+  showToast('Cart cleared', 'All items have been removed.')
+}
+
+function checkoutWhatsApp(){
+  if(!cart.length) return
+  const note = document.getElementById('cart-note-input') ? document.getElementById('cart-note-input').value : ''
+  const lines = cart.map(i => `• ${i.title} (x${i.qty}) — ${fmt(i.price * i.qty)}`)
+  const total = fmt(cartTotal())
+  const msg = ['Hello BlueBridge! 👋 I\'d like to order the following:', '', ...lines, '', `Subtotal: ${total}`, ...(note.trim() ? ['', `Note: ${note.trim()}`] : []), '', 'Please confirm availability and payment details. Thank you!'].join('\n')
+  window.open(`https://wa.me/${CONTACT.whatsappWaMe}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer')
+  showToast('Opening WhatsApp 🎉', 'Your order summary is ready to send.')
+  closeCart()
+}
+
+function renderCartBody(){
+  const body = document.getElementById('cart-body')
+  if(cart.length === 0){
+    body.innerHTML = `<div class="cart-empty"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><p style="font-size:.9rem;line-height:1.6">Your cart is empty.<br>Browse materials and add something to get started.</p><button class="btn btn-outline btn-sm" onclick="closeCart();navTo('shop')">Browse Shop</button></div>`
+    return
+  }
+  const items = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-info">
+        <div class="cart-item-title">${item.title}</div>
+        <div class="cart-item-sub">${item.category} · ${item.format}</div>
+        <div class="cart-item-price">${fmt(item.price * item.qty)}</div>
+      </div>
+      <div class="cart-item-actions">
+        <button class="cart-rm-btn" onclick="removeItem('${item.id}')" aria-label="Remove ${item.title} from cart">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div class="qty-ctrl">
+          <button onclick="decrementItem('${item.id}')" aria-label="Decrease quantity">−</button>
+          <span aria-label="Quantity: ${item.qty}">${item.qty}</span>
+          <button onclick="incrementItem('${item.id}')" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+    </div>`).join('')
+
+  body.innerHTML = items + `
+    <div class="cart-note-area">
+      <label for="cart-note-input">Order Note (optional)</label>
+      <textarea id="cart-note-input" placeholder="Any questions or special requests..." aria-label="Order note">${cartNoteVal}</textarea>
+    </div>`
+
+  document.getElementById('cart-note-input').addEventListener('input', e => cartNoteVal = e.target.value)
+}
+
+/* ─────────────────────────────────────────────────
+   SHOP
+───────────────────────────────────────────────── */
+function filterProducts(){
+  const q = document.getElementById('shop-search').value.toLowerCase().trim()
+  const filtered = PRODUCTS.filter(p => {
+    const matchCat = currentCat === 'All' || p.category === currentCat
+    const matchQ   = !q || `${p.title} ${p.desc} ${p.category}`.toLowerCase().includes(q)
+    return matchCat && matchQ
+  })
+  renderProducts(filtered)
+}
+function filterCat(cat, btn){
+  currentCat = cat
+  document.querySelectorAll('.filter-chip').forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed','false') })
+  btn.classList.add('active'); btn.setAttribute('aria-pressed','true')
+  filterProducts()
+}
+function renderProducts(list){
+  const grid = document.getElementById('shop-grid')
+  if(!list.length){
+    grid.innerHTML = '<div class="card card-pad" style="grid-column:1/-1"><p style="color:var(--muted);font-size:.9rem">No products match your filter. Try another category or search term.</p></div>'
+    return
+  }
+  grid.innerHTML = list.map(p => `
+    <div class="card card-pad" style="display:flex;flex-direction:column">
+      ${p.popular ? '<div class="popular-tag">Popular</div>' : ''}
+      <div style="font-size:.78rem;color:var(--muted);margin-bottom:8px">${p.category} · ${p.format}</div>
+      <div class="pc-title">${p.title}</div>
+      <p style="font-size:.84rem;color:var(--muted);line-height:1.6;margin-bottom:16px;flex:1">${p.desc}</p>
+      <div class="pc-footer">
+        <span class="pc-price">${fmt(p.price)}</span>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-outline btn-sm" onclick="window.open('https://wa.me/${CONTACT.whatsappWaMe}?text=${encodeURIComponent('Hi! I\'d like to ask about: ')}'+encodeURIComponent('${p.title}'),'_blank','noopener')" aria-label="Ask about ${p.title} on WhatsApp">Ask</button>
+          <button class="btn btn-primary btn-sm" onclick="addToCart('${p.id}')" aria-label="Add ${p.title} to cart">+ Add</button>
+        </div>
+      </div>
+    </div>`).join('')
+}
+
+/* ─────────────────────────────────────────────────
+   EXAM TABS
+───────────────────────────────────────────────── */
+function setExam(name, btn){
+  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false') })
+  btn.classList.add('active'); btn.setAttribute('aria-selected','true')
+  const d = EXAM_DATA[name]
+  const who = document.getElementById('exam-who')
+  who.style.opacity = '0'
+  setTimeout(() => {
+    who.textContent = d.who
+    document.getElementById('exam-group-label').textContent = d.groupLabel
+    document.getElementById('exam-group-price').textContent = d.group
+    document.getElementById('exam-solo-price').textContent  = d.solo
+    who.style.opacity = '1'
+  }, 150)
+}
+document.getElementById('exam-who').style.transition = 'opacity .2s'
+
+/* ─────────────────────────────────────────────────
+   PRICING TOGGLE
+───────────────────────────────────────────────── */
+function setPricing(mode, btn){
+  document.querySelectorAll('.t-opt').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false') })
+  btn.classList.add('active'); btn.setAttribute('aria-pressed','true')
+  const d = PRICING_DATA[mode]
+  ;['price-group','price-1to1','price-abroad'].forEach(id => {
+    const el = document.getElementById(id)
+    if(!el) return
+    el.style.opacity = '0'
+    setTimeout(() => {
+      if(id === 'price-group')  el.textContent = d.group
+      if(id === 'price-1to1')   el.textContent = d.solo
+      if(id === 'price-abroad') el.textContent = d.abroad
+      el.style.opacity = '1'
+    }, 120)
+  })
+}
+
+/* ─────────────────────────────────────────────────
+   CAROUSEL
+───────────────────────────────────────────────── */
+const totalSlides = 3
+function updateCarousel(){
+  document.getElementById('carousel-track').style.transform = `translateX(-${slideIdx * 100}%)`
+  document.querySelectorAll('.carousel-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === slideIdx)
+    d.setAttribute('aria-selected', String(i === slideIdx))
+  })
+}
+function goSlide(n){ slideIdx = n; updateCarousel(); resetTimer() }
+function nextSlide(){ slideIdx = (slideIdx + 1) % totalSlides; updateCarousel() }
+function prevSlide(){ slideIdx = (slideIdx - 1 + totalSlides) % totalSlides; updateCarousel(); resetTimer() }
+function resetTimer(){ clearInterval(slideTimer); slideTimer = setInterval(nextSlide, 5000) }
+
+/* ─────────────────────────────────────────────────
+   FAQ
+───────────────────────────────────────────────── */
+function toggleFaq(btn){
+  const item = btn.closest('.faq-item')
+  const body = item.querySelector('.faq-body')
+  const isOpen = item.classList.contains('open')
+  document.querySelectorAll('.faq-item.open').forEach(i => {
+    i.classList.remove('open'); i.querySelector('.faq-body').classList.remove('open')
+    i.querySelector('.faq-trigger').setAttribute('aria-expanded','false')
+  })
+  if(!isOpen){
+    item.classList.add('open'); body.classList.add('open')
+    btn.setAttribute('aria-expanded','true')
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   ELIGIBILITY QUIZ
+───────────────────────────────────────────────── */
+function runQuiz(){
+  const goal     = document.getElementById('q-goal').value
+  const budget   = document.getElementById('q-budget').value
+  const timeline = document.getElementById('q-timeline').value
+  const result   = document.getElementById('quiz-result')
+  const ph       = document.getElementById('quiz-placeholder')
+  if(!goal || !budget || !timeline){ result.classList.remove('show'); ph.style.display='block'; return }
+
+  let title   = 'Recommended: Step-by-step plan + monthly check-ins'
+  let bullets = ['Start with materials + weekly practice', 'Schedule a mock evaluation once ready', 'Upgrade to coaching when you hit a plateau']
+  if(timeline === '0-3' && budget === 'high'){
+    title   = 'Recommended: Intensive + 1:1 + mock feedback'
+    bullets = ['Start with a diagnostic + band-gap plan', 'Add 1:1 coaching for writing and speaking', 'Do a full mock evaluation every week']
+  } else if(timeline === '3-6'){
+    title   = 'Recommended: Group class + materials bundle'
+    bullets = ['Join the structured group course', 'Use templates + vocab packs for speed', 'Book one mock evaluation before exam day']
+  }
+
+  document.getElementById('quiz-title').textContent = title
+  document.getElementById('quiz-bullets').innerHTML = bullets.map(b =>
+    `<li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>${b}</span></li>`
+  ).join('')
+  ph.style.display = 'none'
+  result.classList.add('show')
+}
+
+/* ─────────────────────────────────────────────────
+   LEGAL MODALS
+───────────────────────────────────────────────── */
+function openModal(type){
+  document.getElementById(`${type}-text`).textContent = LEGAL[type]
+  const modal = document.getElementById(`modal-${type}`)
+  modal.classList.add('open')
+  document.body.style.overflow = 'hidden'
+  /* focus close button for a11y */
+  setTimeout(() => modal.querySelector('.close-btn').focus(), 50)
+}
+function closeModal(type){
+  document.getElementById(`modal-${type}`).classList.remove('open')
+  document.body.style.overflow = ''
+}
+/* Close modal on ESC is handled in the global keydown listener above */
+
+/* ─────────────────────────────────────────────────
+   CONTACT FORM
+───────────────────────────────────────────────── */
+function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) }
+
+function submitContact(e){
+  e.preventDefault()
+  const name    = document.getElementById('cf-name').value.trim()
+  const email   = document.getElementById('cf-email').value.trim()
+  const service = document.getElementById('cf-service').value.trim()
+  const details = document.getElementById('cf-details').value.trim()
+  const errEl   = document.getElementById('cf-email-err')
+  const emailIn = document.getElementById('cf-email')
+
+  /* Reset */
+  errEl.style.display = 'none'; emailIn.classList.remove('error')
+
+  if(!name){
+    showToast('Missing field', 'Please enter your name.', true)
+    document.getElementById('cf-name').focus()
+    return
+  }
+  if(!isValidEmail(email)){
+    errEl.textContent = 'Please enter a valid email address.'
+    errEl.style.display = 'block'
+    emailIn.classList.add('error')
+    emailIn.setAttribute('aria-invalid','true')
+    showToast('Invalid email', 'Please enter a valid email address.', true)
+    emailIn.focus()
+    return
+  }
+  emailIn.setAttribute('aria-invalid','false')
+
+  const subject = encodeURIComponent(`Enquiry from ${name} — ${service || 'General'}`)
+  const body    = encodeURIComponent([`Name:    ${name}`, `Email:   ${email}`, `Service: ${service}`, '', details].join('\n'))
+  window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`
+  showToast('Opening email client ✉️', 'Your message is pre-filled and ready to send.')
+}
+
+/* ─────────────────────────────────────────────────
+   INIT
+───────────────────────────────────────────────── */
+renderProducts(PRODUCTS)
+updateCartUI()
+</script>
+</body>
+</html>
